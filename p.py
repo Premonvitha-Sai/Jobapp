@@ -9,35 +9,10 @@ def load_data():
     df = pd.read_csv('data.csv')
     return df
 
-# Function to drop unnecessary columns
-def drop_columns(df):
-    df.drop(['Uniq Id','Crawl Timestamp'], axis=1, inplace=True)
-    return df
-
-# Function to print the information about the dataset
-def print_info(df):
-    info = df.info()
-    return info
-
-# Function to print the shape of the dataset
-def print_shape(df):
-    shape = df.shape
-    return shape
-
-# Function to calculate the percentage of missing values
-def missing_values(df):
-    missing_percentage = df.isnull().sum()*100/len(df)
-    return missing_percentage
-
-# Function to identify duplicate entries
-def print_duplicates(df):
-    duplicates = df[df.duplicated(keep=False)]
-    return duplicates
-
 # Main function to control the flow of the application
 def main():
     st.sidebar.title("Choose Here!!!")
-    selection = st.sidebar.radio("Go to", ["Home", "Data Overview", "Visualizations", "Search for Jobs"])
+    selection = st.sidebar.radio("Go to", ["Home", "Visualizations", "Search for Jobs"])
 
     # Load processed data for visualizations and search
     data = pd.read_csv('processed_data.csv')
@@ -49,29 +24,6 @@ def main():
         st.write('Swapna Dande')
         st.write('Premonvitha Sai Rayana')
         st.write('@ Research and Analysis Interns')
-
-    elif selection == "Data Overview":
-        st.title('Data Overview')
-
-        # Load and preprocess data
-        df = load_data()
-        df = drop_columns(df)
-
-        # Print info and shape of the dataset
-        info = print_info(df)
-        st.write(info)
-
-        shape = print_shape(df)
-        st.write(f'Shape of the dataset: {shape}')
-
-        # Print duplicate entries and percentage of missing values
-        duplicates = print_duplicates(df)
-        st.write('Duplicate entries:')
-        st.write(duplicates)
-
-        st.write('Percentage of missing values:')
-        missing_percentage = missing_values(df)
-        st.write(missing_percentage)
 
     elif selection == "Visualizations":
         st.title('Visualizations')
